@@ -1,24 +1,10 @@
-name: Test GO
+name: Build UI
 
 on: workflow_call
 
 jobs:
-  code_lint:
+  ui_build_backend:
     name: Code lint with golangci-lint
-    runs-on: ubuntu-latest
-    container:
-      image: golangci/golangci-lint:v1.45.2
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: run_golangci-lint
-        run: |
-          echo "golangci-lint run --issues-exit-code 1 --out-format code-climate | tee gl-code-quality-report.json | jq -r '.[]"
-
-  code_test:
-    name: Code test with go test
     runs-on: ubuntu-latest
     container:
       image: vxcontrol/vxbuild-cross:1.19.1
@@ -26,9 +12,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Common
+        uses: ./.github/workflows/common.yml
+      - name: run_golangci-lint
+        run: |
+          echo "make build-ui"
 
+  ui_build_frontend:
+    name: Code test with go test
+    runs-on: ubuntu-latest
+    container:
+      image: node:15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Common
+        uses: ./.github/workflows/common.yml
       - name: run_go-test
         run: |
-          mkdir -p .go
-          echo "go get ./..."
-          echo "make test"
+          echo "cd client && yarn install"
+          echo "npx --max_old_space_size=4096 vue-cli-service build"

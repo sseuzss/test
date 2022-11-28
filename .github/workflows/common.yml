@@ -1,0 +1,9 @@
+runs:
+  using: "composite"
+  steps:
+
+    - name: Creating dirs
+      run: |
+        mkdir -p .go
+        mkdir -v -p build/package/agent/hardening/
+        mkdir -v -p build/package/agent/_tmp/{linux/386/,linux/amd64,windows/386,windows/amd64,darwin/amd64}
