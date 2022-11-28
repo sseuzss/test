@@ -1,7 +1,6 @@
 runs:
   using: "composite"
   steps:
-
     - name: Creating dirs
       run: |
         mkdir -p .go
