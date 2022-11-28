@@ -5,6 +5,7 @@ on: push
 jobs:
   test_go:
     uses: ./.github/workflows/test-go.yml
+    needs: prepare_build
   prepare_build:
     uses: ./.github/workflows/prepare_build.yml
   build_ui:
