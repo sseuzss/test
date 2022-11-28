@@ -9,4 +9,4 @@ jobs:
 
     steps:
       - name: test_go
-        uses: ./.github/workflows/workflow-2.yml
+        uses: ./.github/workflows/test-go.yml

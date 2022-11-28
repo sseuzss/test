@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: run_golangci-lint
-          run: |
-            echo "golangci-lint run --issues-exit-code 1 --out-format code-climate | tee gl-code-quality-report.json | jq -r '.[]"
+        run: |
+          echo "golangci-lint run --issues-exit-code 1 --out-format code-climate | tee gl-code-quality-report.json | jq -r '.[]"
 
   code_test:
     name: Code lint with golangci-lint
@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: run_go-test
-          run: |
-            mkdir -p .go
-            echo "go get ./..."
-            echo "make test"
+        run: |
+          mkdir -p .go
+          echo "go get ./..."
+          echo "make test"
