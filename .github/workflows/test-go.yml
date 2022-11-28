@@ -1,0 +1,34 @@
+name: Test GO
+
+on: workflow_call
+
+jobs:
+  code_lint:
+    name: Code lint with golangci-lint
+    runs-on: ubuntu-latest
+    container:
+      image: golangci/golangci-lint:v1.45.2
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: run golangci-lint
+          run: |
+            echo "golangci-lint run --issues-exit-code 1 --out-format code-climate | tee gl-code-quality-report.json | jq -r '.[]"
+
+  code_test:
+    name: Code lint with golangci-lint
+    runs-on: ubuntu-latest
+    container:
+      image: vxcontrol/vxbuild-cross:1.19.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: run golangci-lint
+          run: |
+            mkdir -p .go
+            echo "go get ./..."
+            echo "make test"
