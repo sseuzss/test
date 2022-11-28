@@ -16,6 +16,9 @@ jobs:
         uses: ./.github/actions/common
       - name: Enable cache
         uses: ./.github/actions/go_cache
+      - uses: actions/download-artifact@v3
+        with:
+          name: all_environment
       - name: Build
         run: |
           make build-ui

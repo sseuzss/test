@@ -5,12 +5,14 @@ on: push
 jobs:
   test_go:
     uses: ./.github/workflows/test-go.yml
+  prepare_build:
+    uses: ./.github/workflows/prepare_build.yml
   build_ui:
     uses: ./.github/workflows/ui-build.yml
-    needs: test_go
+    needs: [test_go, prepare_build]
   build_server:
     uses: ./.github/workflows/server-build.yml
-    needs: test_go
+    needs: [test_go, prepare_build]
   build_agent_linux:
     uses: ./.github/workflows/agent-build-linux.yml
-    needs: test_go
+    needs: [test_go, prepare_build]
