@@ -2,6 +2,7 @@ runs:
   using: "composite"
   steps:
     - name: Creating dirs
+      shell: bash
       run: |
         mkdir -p .go
         mkdir -v -p build/package/agent/hardening/
