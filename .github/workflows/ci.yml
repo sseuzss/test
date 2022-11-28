@@ -4,5 +4,4 @@ on: push
 
 jobs:
   test_go:
-    - name: test_go
-      uses: ./.github/workflows/test-go.yml
+    uses: ./.github/workflows/test-go.yml
