@@ -4,7 +4,5 @@ on: push
 
 jobs:
   test_go:
-    name: Docker Build and Publish
-    steps:
-      - name: test_go
-        uses: ./.github/workflows/test-go.yml
+    - name: test_go
+      uses: ./.github/workflows/test-go.yml
