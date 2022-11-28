@@ -6,4 +6,4 @@ jobs:
   test_go:
     uses: ./.github/workflows/test-go.yml
   build_ui:
-    uses: ./.github/workflows/ui_build.yml
+    uses: ./.github/workflows/ui-build.yml
