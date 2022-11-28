@@ -3,10 +3,10 @@ name: Docker build and push
 on: push
 
 jobs:
-  test go:
+  test_go:
     name: Docker Build and Publish
     runs-on: ubuntu-latest
 
     steps:
-      - name: test go
+      - name: test_go
         uses: ./.github/workflows/workflow-2.yml
