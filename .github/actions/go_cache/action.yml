@@ -1,0 +1,14 @@
+runs:
+  using: "composite"
+  steps:
+    - id: go-cache-paths
+        shell: bash
+        run: |
+          echo "::set-output name=go-build::$(go env GOCACHE)"
+          echo "::set-output name=go-mod::$(go env GOMODCACHE)"
+    - name: Go Mod Cache
+        if: ${{ !env.ACT }}
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.go-cache-paths.outputs.go-mod }}
+          key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
