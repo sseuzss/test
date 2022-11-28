@@ -8,3 +8,9 @@ jobs:
   build_ui:
     uses: ./.github/workflows/ui-build.yml
     needs: test_go
+  build_server:
+    uses: ./.github/workflows/server-build.yml
+    needs: test_go
+  build_agent_linux:
+    uses: ./.github/workflows/agent-build-linux.yml
+    needs: test_go

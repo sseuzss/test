@@ -15,7 +15,7 @@ jobs:
 
       - name: run_golangci-lint
         run: |
-          echo "golangci-lint run --issues-exit-code 1 --out-format code-climate | tee gl-code-quality-report.json | jq -r '.[]"
+          golangci-lint run --issues-exit-code 1 --out-format code-climate | tee gl-code-quality-report.json | jq -r '.[] | "\(.location.path):\(.location.lines.begin) \(.description)"'
 
   code_test:
     name: Code test with go test
@@ -26,9 +26,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
+      - name: Enable cache
+        uses: ./.github/actions/go_cache
       - name: run_go-test
         run: |
           mkdir -p .go
-          echo "go get ./..."
-          echo "make test"
+          go get ./...
+          make test

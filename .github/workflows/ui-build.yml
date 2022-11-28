@@ -14,9 +14,19 @@ jobs:
         uses: actions/checkout@v3
       - name: Common
         uses: ./.github/actions/common
-      - name: run_golangci-lint
+      - name: Enable cache
+        uses: ./.github/actions/go_cache
+      - name: Build
         run: |
-          echo "make build-ui"
+          make build-ui
+      - name: Upload math result for ui_build_backend
+        uses: actions/upload-artifact@v3
+        with:
+          name: ui_backend
+          path: |
+            ./build/bin/ui
+            ./cmd/ui
+
 
   ui_build_frontend:
     name: Build frontend UI
@@ -27,9 +37,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Common
+      - name: Create directories
         uses: ./.github/actions/common
-      - name: run_go-test
+      - name: Enable cache
+        uses: ./.github/actions/yarn_cache
+      - name: Build
         run: |
-          echo "cd client && yarn install"
-          echo "npx --max_old_space_size=4096 vue-cli-service build"
+          cd client && yarn install
+          npx --max_old_space_size=4096 vue-cli-service build
+      - name: Upload math result for ui_build_frontend
+          uses: actions/upload-artifact@v3
+          with:
+            name: ui_frontend
+            path: build/package/ui/client/dist/

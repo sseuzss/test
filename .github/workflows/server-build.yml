@@ -1,0 +1,28 @@
+name: Build server
+
+on: workflow_call
+
+jobs:
+  server_build:
+    name: Build server
+    runs-on: ubuntu-latest
+    container:
+      image: vxcontrol/vxbuild-cross:1.19.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Common
+        uses: ./.github/actions/common
+      - name: Enable cache
+        uses: ./.github/actions/go_cache
+      - name: Build
+        run: |
+          make build-server
+      - name: Upload math result for server
+        uses: actions/upload-artifact@v3
+        with:
+          name: server
+          path: |
+            ./build/artifacts/server/version
+            ./build/bin/server
