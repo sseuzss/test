@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: |
           make build-api
-      - name: Upload math result for ui_build_backend
+      - name: Upload result for ui_build_backend
         uses: actions/upload-artifact@v3
         with:
           name: ui_backend
@@ -47,7 +47,7 @@ jobs:
       - name: Build
         run: |
           make build-web
-      - name: Upload math result for ui_build_frontend
+      - name: Upload result for ui_build_frontend
         uses: actions/upload-artifact@v3
         with:
           name: ui_frontend

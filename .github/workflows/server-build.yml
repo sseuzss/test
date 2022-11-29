@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: |
           make build-server
-      - name: Upload math result for server
+      - name: Upload result for server
         uses: actions/upload-artifact@v3
         with:
           name: server

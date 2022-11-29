@@ -17,3 +17,9 @@ jobs:
   build_agent_linux:
     uses: ./.github/workflows/agent-build-linux.yml
     needs: [test_go, prepare_build]
+  build_agent_windows:
+    uses: ./.github/workflows/agent-build-windows.yml
+    needs: [ test_go, prepare_build ]
+  build_agent_osx:
+    uses: ./.github/workflows/agent-build-osx.yml
+    needs: [ test_go, prepare_build ]
