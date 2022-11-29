@@ -7,7 +7,7 @@ jobs:
     name: Build agent windows
     runs-on: ubuntu-latest
     container:
-      image: vxcontrol/vxbuild-cross:1.19.1
+      image: vxcontrol/vxbuild-cross
 
     steps:
       - name: Checkout
