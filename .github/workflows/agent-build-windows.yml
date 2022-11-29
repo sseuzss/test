@@ -25,6 +25,7 @@ jobs:
           # windows
           bash -x ./build-windows-386.sh && mv -v ../../bin/vxagent.exe  _tmp/windows/386/
           bash -x ./build-windows-amd64.sh && mv -v ../../bin/vxagent.exe  _tmp/windows/amd64/
+          ls -la ../../bin/ || true
           # Common components
           cp -v startup.sh _tmp/
           cp -v ../../artifacts/agent/version _tmp/

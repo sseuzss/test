@@ -23,11 +23,11 @@ jobs:
         run: |
           make build-api
           echo "./build/bin/api"
-          ls -la ./build/bin/api
+          ls -la ./build/bin/api || true
           echo "./build/artifacts/api"
-          ls -la ./build/artifacts/api
+          ls -la ./build/artifacts/api || true
           echo "./cmd/api"
-          ls -la ./cmd/api
+          ls -la ./cmd/api || true
       - name: Upload result for ui_build_backend
         uses: actions/upload-artifact@v3
         with:
