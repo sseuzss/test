@@ -14,14 +14,14 @@
   },
   "StringFileInfo": {
     "Comments": "",
-    "CompanyName": "Breakthrough Technologies LLC",
-    "FileDescription": "PT XDR Agent",
+    "CompanyName": "",
+    "FileDescription": "SOLDR Agent",
     "InternalName": "vxagent.exe",
-    "LegalCopyright": "(c) Breakthrough Technologies LLC. All rights reserved",
-    "LegalTrademarks": "PT XDR",
+    "LegalCopyright": "MIT",
+    "LegalTrademarks": "SOLDR",
     "OriginalFilename": "vxagent.exe",
     "PrivateBuild": "",
-    "ProductName": "PT XDR",
+    "ProductName": "SOLDR",
     "SpecialBuild": ""
   },
   "VarFileInfo": {
