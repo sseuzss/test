@@ -1,0 +1,35 @@
+{
+  "FixedFileInfo": {
+    "FileVersion": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 0,
+      "Build": 0
+    },
+    "FileFlagsMask": "3f",
+    "FileFlags": "00",
+    "FileOS": "040004",
+    "FileType": "01",
+    "FileSubType": "00"
+  },
+  "StringFileInfo": {
+    "Comments": "",
+    "CompanyName": "Breakthrough Technologies LLC",
+    "FileDescription": "PT XDR Agent",
+    "InternalName": "vxagent.exe",
+    "LegalCopyright": "(c) Breakthrough Technologies LLC. All rights reserved",
+    "LegalTrademarks": "PT XDR",
+    "OriginalFilename": "vxagent.exe",
+    "PrivateBuild": "",
+    "ProductName": "PT XDR",
+    "SpecialBuild": ""
+  },
+  "VarFileInfo": {
+    "Translation": {
+      "LangID": 1033,
+      "CharsetID": 1200
+    }
+  },
+  "IconPath": "images/app.ico",
+  "ManifestPath": ""
+}
