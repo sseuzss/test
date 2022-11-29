@@ -6,6 +6,7 @@ if [ `uname` = Linux ]; then
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+chmod +x "${DIR}/tools/goversioninfo"
 [ `uname` = "Linux" ] && GOVERSIONINFO="${DIR}/tools/goversioninfo" || GOVERSIONINFO="goversioninfo"
 [ -n "${PACKAGE_VER+set}" ] || PACKAGE_VER=$(git describe --always `git rev-list --tags --max-count=1`)
 SYSO=build/rsrc_windows_amd64.syso
