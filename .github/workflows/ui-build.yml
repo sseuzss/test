@@ -21,14 +21,14 @@ jobs:
           name: all_environment
       - name: Build
         run: |
-          make build-ui
+          make build-api
       - name: Upload math result for ui_build_backend
         uses: actions/upload-artifact@v3
         with:
           name: ui_backend
           path: |
-            ./build/bin/ui
-            ./cmd/ui
+            ./build/bin/api
+            ./cmd/api
 
 
   ui_build_frontend:
@@ -46,10 +46,9 @@ jobs:
         uses: ./.github/actions/yarn_cache
       - name: Build
         run: |
-          cd client && yarn install
-          npx --max_old_space_size=4096 vue-cli-service build
+          make build-web
       - name: Upload math result for ui_build_frontend
         uses: actions/upload-artifact@v3
         with:
           name: ui_frontend
-          path: build/package/ui/client/dist/
+          path: web/dist/
