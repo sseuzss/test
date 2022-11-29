@@ -2,6 +2,7 @@ runs:
   using: "composite"
   steps:
     - name: Get yarn cache directory path
+      shell: bash
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
 

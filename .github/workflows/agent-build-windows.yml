@@ -32,7 +32,7 @@ jobs:
       - name: Upload result for agent windows
         uses: actions/upload-artifact@v3
         with:
-          name: agent_linux
+          name: agent_windows
           path: |
             build/package/*/_tmp/
             build/package/*/Dockerfile
