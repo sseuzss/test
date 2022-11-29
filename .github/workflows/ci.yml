@@ -3,23 +3,24 @@ name: Docker build and push
 on: push
 
 jobs:
-  test_go:
-    uses: ./.github/workflows/test-go.yml
-    needs: prepare_build
+#  test_go:
+#    uses: ./.github/workflows/test-go.yml
+#    needs: prepare_build
   prepare_build:
     uses: ./.github/workflows/prepare_build.yml
-  build_ui:
-    uses: ./.github/workflows/ui-build.yml
-    needs: [test_go, prepare_build]
+#  build_ui:
+#    uses: ./.github/workflows/ui-build.yml
+#    needs: [test_go, prepare_build]
   build_server:
     uses: ./.github/workflows/server-build.yml
-    needs: [test_go, prepare_build]
+    needs: prepare_build
+#    needs: [test_go, prepare_build]
 #  build_agent_linux:
 #    uses: ./.github/workflows/agent-build-linux.yml
 #    needs: [test_go, prepare_build]
-  build_agent_windows:
-    uses: ./.github/workflows/agent-build-windows.yml
-    needs: [ test_go, prepare_build ]
+#  build_agent_windows:
+#    uses: ./.github/workflows/agent-build-windows.yml
+#    needs: [ test_go, prepare_build ]
 #  build_agent_osx:
 #    uses: ./.github/workflows/agent-build-osx.yml
 #    needs: [ test_go, prepare_build ]
