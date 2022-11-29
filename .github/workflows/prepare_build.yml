@@ -7,7 +7,7 @@ jobs:
     name: Generate all
     runs-on: ubuntu-latest
     container:
-      image: ${{ env.VX_CONTROL_IMAGE }}
+      image: vxcontrol/vxbuild-cross
 
     steps:
       - name: Checkout
