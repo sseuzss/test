@@ -35,7 +35,7 @@ jobs:
     name: Build frontend UI
     runs-on: ubuntu-latest
     container:
-      image: node:15
+      image: node:16
 
     steps:
       - name: Checkout
