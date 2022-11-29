@@ -67,6 +67,32 @@ services:
       mysql:
         condition: service_started
 
+  vxres:
+    image: vxcontrol/soldr-vxres
+    container_name: vx_res
+    hostname: vxres.local
+    restart: unless-stopped
+    links:
+      - minio:minio.local
+      - mysql:mysql.local
+    networks:
+      - vx-stand
+    environment:
+      DB_HOST: mysql.local
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      MINIO_ENDPOINT: http://minio.local:9000
+    depends_on:
+      minio:
+        condition: service_started
+      mysql:
+        condition: service_started
+
 networks:
   vx-stand:
     driver: bridge

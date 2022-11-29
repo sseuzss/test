@@ -22,6 +22,8 @@ jobs:
       - name: Build
         run: |
           make build-server
+          ls -la ./build/artifacts/server/version
+          ls -la ./build/bin/server
       - name: Upload result for server
         uses: actions/upload-artifact@v3
         with:

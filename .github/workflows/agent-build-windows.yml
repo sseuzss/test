@@ -23,8 +23,8 @@ jobs:
         run: |
           cd build/package/agent/
           # windows
-          bash -x ./build-windows-386.sh && mv -v ../../bin/vxagent  _tmp/windows/386/
-          bash -x ./build-windows-amd64.sh && mv -v ../../bin/vxagent  _tmp/windows/amd64/
+          bash -x ./build-windows-386.sh && mv -v ../../bin/vxagent.exe  _tmp/windows/386/
+          bash -x ./build-windows-amd64.sh && mv -v ../../bin/vxagent.exe  _tmp/windows/amd64/
           # Common components
           cp -v startup.sh _tmp/
           cp -v ../../artifacts/agent/version _tmp/
