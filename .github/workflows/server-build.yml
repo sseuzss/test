@@ -29,5 +29,5 @@ jobs:
         with:
           name: server
           path: |
-            ./build/artifacts/server/version
-            ./build/bin/vxserver
+            ${{ github.workspace }}/build/artifacts/server/version
+            ${{ github.workspace }}/build/bin/vxserver
