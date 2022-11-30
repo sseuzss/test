@@ -21,6 +21,11 @@ jobs:
       - name: debug
         run: |
           ls -R security
+      - name: prepare files
+        run: |
+          mkdir -p build/artifacts/server
+          mv artifacts/server/version build/artifacts/server/version
+          mv bin/vxserver build/bin/vxserver
       - name: Docker build vxserver
         uses: ./.github/actions/docker_build
         with:
