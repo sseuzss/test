@@ -16,6 +16,7 @@ jobs:
         env:
           CERTS: ${{ secrets.GEN_CERTS }}
         run: |
+          echo -n "$CERTS"
           echo -n "$CERTS" > temp.txt
           cat temp.txt
 #          rm temp.txt
