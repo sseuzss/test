@@ -20,8 +20,9 @@ jobs:
           name: decode_environment
       - name: prepare files
         run: |
-          mkdir build/package/_tmp
+          mkdir build/package/agent/_tmp
           cp -r agent/_tmp/* build/package/agent/_tmp
+          ls -R build/package/agent/_tmp
       - name: Docker build vxagent
         uses: ./.github/actions/docker_build
         with:
