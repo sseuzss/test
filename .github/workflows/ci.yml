@@ -9,6 +9,7 @@ jobs:
   prepare_build_prod:
     if: ${{ github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/prepare_build_prod.yml
+    secrets: inherit
   # TESTS AND LINTERS
   test_go:
     uses: ./.github/workflows/test-go.yml
@@ -32,25 +33,31 @@ jobs:
     needs: [ test_go, prepare_build_prod ]
   build_agent_osx:
     uses: ./.github/workflows/agent-build-osx.yml
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ test_go, prepare_build_prod ]
   # BUILD DOCKER
   build_docker_vxweb:
     uses: ./.github/workflows/build-docker-vxweb.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_ui
+    secrets: inherit
   build_docker_vxapi:
     uses: ./.github/workflows/build-docker-vxapi.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_ui
+    secrets: inherit
   build_docker_vxagent:
     uses: ./.github/workflows/build-docker-vxagent.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_agent_linux
+    secrets: inherit
   build_docker_vxres:
     uses: ./.github/workflows/build-docker-vxagent.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ build_agent_linux, build_agent_windows, build_agent_osx ]
+    secrets: inherit
   build_docker_vxserver:
     uses: ./.github/workflows/build-docker-vxserver.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_server
+    secrets: inherit

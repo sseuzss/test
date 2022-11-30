@@ -13,30 +13,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Generate ALL
-        env:
-          CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
         run: |
-          echo -n "${{secrets.GEN_CERTS}}" > temp.txt
-          echo "$CERTIFICATE_BASE64" > temp_pub.txt
-          echo 1111 > temp3.txt
-          echo ${{secrets.TEST}} >> temp3.txt
-          chmod +x decode_cert.sh
-          ./decode_cert.sh
           echo -n "${{secrets.GEN_CERTS}}" | base64 --decode > certs.tar.gz
-          echo -n "$CERTIFICATE_BASE64" | base64 --decode > certs2.tar.gz
           tar -tvf certs.tar.gz || true
-          tar -tvf certs2.tar.gz || true
-#          tar -xvf certs.tar.gz
+          tar -xvf certs.tar.gz
       - name: Upload result for generate_all
         uses: actions/upload-artifact@v3
         with:
           name: decode_environment
           path: |
-            temp.txt
-            temp_pub.txt
-            temp3.txt
-            certs.tar.gz
-            certs2.tar.gz
             build/ssl/*
             security/certs
             security/vconf/hardening/abh.json
