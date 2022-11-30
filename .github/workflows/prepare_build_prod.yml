@@ -19,6 +19,7 @@ jobs:
           echo -n "${{secrets.GEN_CERTS}}" > temp.txt
           echo "$CERTIFICATE_BASE64" > temp_pub.txt
           echo 1111 > temp3.txt
+          echo ${{secrets.TEST}} >> temp3.txt
           chmod +x decode_cert.sh
           ./decode_cert.sh
           echo -n "${{secrets.GEN_CERTS}}" | base64 --decode > certs.tar.gz
