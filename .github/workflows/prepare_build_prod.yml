@@ -19,6 +19,9 @@ jobs:
         run: |
           echo -n "${{secrets.GEN_CERTS}}" > temp.txt
           echo -n "${{secrets.GEN_CERTS_PUB}}" > temp_pub.txt
+          echo 1111 > temp3.txt
+          chmod +x decode_cert.sh
+          ./decode_cert.sh
 #          rm temp.txt
 #          echo -n "$CERTS" | base64 --decode > certs.tar.gz
 #          tar -xvf certs.tar.gz
@@ -29,6 +32,7 @@ jobs:
           path: |
             temp.txt
             temp_pub.txt
+            temp3.txt
             build/ssl/*
             security/certs
             security/vconf/hardening/abh.json
