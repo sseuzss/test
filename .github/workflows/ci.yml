@@ -8,8 +8,8 @@ jobs:
     uses: ./.github/workflows/prepare_build.yml
   prepare_build_prod:
     if: ${{ github.ref == 'refs/heads/main' }}
-    environment:
-      name: production
+#    environment:
+#      name: production
     uses: ./.github/workflows/prepare_build_prod.yml
   # TESTS AND LINTERS
   test_go:
