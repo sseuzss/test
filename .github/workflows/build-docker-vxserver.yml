@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: server
       - uses: actions/download-artifact@v3
         with:
           name: decode_environment
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: debug
         run: |
           ls -R security
