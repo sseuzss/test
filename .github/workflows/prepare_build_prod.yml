@@ -8,8 +8,6 @@ jobs:
     environment:
       name: production
     runs-on: ubuntu-latest
-    container:
-      image: vxcontrol/vxbuild-cross
 
     steps:
       - name: Checkout
@@ -18,7 +16,9 @@ jobs:
         env:
           CERTS: ${{ secrets.GEN_CERTS }}
         run: |
-          echo
+          echo -n "$CERTS" > temp.txt
+          cat temp.txt
+          rm temp.txt
           echo -n "$CERTS" | base64 --decode > certs.tar.gz
           tar -xvf certs.tar.gz
       - name: Upload result for generate_all
