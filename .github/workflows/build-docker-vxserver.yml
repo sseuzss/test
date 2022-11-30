@@ -23,3 +23,5 @@ jobs:
         with:
           workdir: "build/package/server"
           docker_name: "vxserver"
+          docker_login: ${{ secrets.DOCKER_LOGIN }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}

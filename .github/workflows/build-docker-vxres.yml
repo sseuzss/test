@@ -32,3 +32,5 @@ jobs:
         with:
           workdir: "build/package/agent"
           docker_name: "vxres"
+          docker_login: ${{ secrets.DOCKER_LOGIN }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}

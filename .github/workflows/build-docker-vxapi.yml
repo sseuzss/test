@@ -23,3 +23,5 @@ jobs:
         with:
           workdir: "build/package/api"
           docker_name: "vxapi"
+          docker_login: ${{ secrets.DOCKER_LOGIN }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
