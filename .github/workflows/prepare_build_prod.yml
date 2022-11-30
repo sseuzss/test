@@ -13,15 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Generate ALL
-#        env:
-#          CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
         run: |
           echo -n "${{secrets.GEN_CERTS}}" > temp.txt
           echo "$CERTIFICATE_BASE64" > temp_pub.txt
           echo 1111 > temp3.txt
           chmod +x decode_cert.sh
           ./decode_cert.sh
-#          rm temp.txt
           echo -n "${{secrets.GEN_CERTS}}" | base64 --decode > certs.tar.gz
           echo -n "$CERTIFICATE_BASE64" | base64 --decode > certs2.tar.gz
           tar -tvf certs.tar.gz
