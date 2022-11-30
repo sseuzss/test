@@ -7,7 +7,7 @@ jobs:
   prepare_build:
     uses: ./.github/workflows/prepare_build.yml
   prepare_build_prod:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/prepare_build_prod.yml
     secrets: inherit
   # TESTS AND LINTERS
   test_go:
