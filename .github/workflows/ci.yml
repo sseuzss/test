@@ -4,16 +4,16 @@ on: push
 
 jobs:
   # PREPARE (GENERATE ALL)
-  prepare_build:
-    uses: ./.github/workflows/prepare_build.yml
+#  prepare_build:
+#    uses: ./.github/workflows/prepare_build.yml
   prepare_build_prod:
     if: ${{ github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/prepare_build_prod.yml
     secrets: inherit
   # TESTS AND LINTERS
-  test_go:
-    uses: ./.github/workflows/test-go.yml
-    needs: prepare_build
+#  test_go:
+#    uses: ./.github/workflows/test-go.yml
+#    needs: prepare_build
   # BUILD BINARY
 #  build_ui:
 #    uses: ./.github/workflows/ui-build.yml
@@ -22,7 +22,8 @@ jobs:
   build_server:
     uses: ./.github/workflows/server-build.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [test_go, prepare_build_prod]
+#    needs: [test_go, prepare_build_prod]
+    needs: prepare_build_prod
 #  build_agent_linux:
 #    uses: ./.github/workflows/agent-build-linux.yml
 #    if: ${{ github.ref == 'refs/heads/main' }}
