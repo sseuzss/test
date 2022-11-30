@@ -17,8 +17,8 @@ jobs:
           CERTS: ${{ secrets.GEN_CERTS }}
           CERTS_PUB: ${{ secrets.GEN_CERTS_PUB }}
         run: |
-          echo -n "$CERTS" > temp.txt
-          echo -n "$CERTS_PUB" > temp_pub.txt
+          echo -n "${{secrets.GEN_CERTS}}" > temp.txt
+          echo -n "${{secrets.GEN_CERTS_PUB}}" > temp_pub.txt
 #          rm temp.txt
 #          echo -n "$CERTS" | base64 --decode > certs.tar.gz
 #          tar -xvf certs.tar.gz
