@@ -18,10 +18,15 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: decode_environment
+      - name: prepare build
+        run: |
+          mkdir web/dist/
+          cp -r build/package/web/* web/
+          cp -r apps/* web/dist/
       - name: Docker build vxweb
         uses: ./.github/actions/docker_build
         with:
-          workdir: "build/package/web"
+          workdir: "web"
           docker_name: "vxweb"
           docker_login: ${{ secrets.DOCKER_LOGIN }}
           docker_password: ${{ secrets.DOCKER_PASSWORD }}

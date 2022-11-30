@@ -28,7 +28,7 @@ jobs:
         run: |
           mv build/package/agent/Dockerfile_cross build/package/agent/Dockerfile
           mkdir build/package/_tmp
-          cp -r agent/_tmp/* build/package/_tmp
+          cp -r agent/_tmp/* build/package/agent/_tmp
       - name: Docker build vxres
         uses: ./.github/actions/docker_build
         with:

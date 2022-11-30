@@ -15,8 +15,12 @@ jobs:
     uses: ./.github/workflows/test-go.yml
     needs: prepare_build
   # BUILD BINARY
-  build_ui:
-    uses: ./.github/workflows/ui-build.yml
+  build_api:
+    uses: ./.github/workflows/api-build.yml
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [test_go, prepare_build_prod]
+  build_web:
+    uses: ./.github/workflows/web-build.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [test_go, prepare_build_prod]
   build_server:
@@ -39,12 +43,12 @@ jobs:
   build_docker_vxweb:
     uses: ./.github/workflows/build-docker-vxweb.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: build_ui
+    needs: build_web
     secrets: inherit
   build_docker_vxapi:
     uses: ./.github/workflows/build-docker-vxapi.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: build_ui
+    needs: build_api
     secrets: inherit
   build_docker_vxagent:
     uses: ./.github/workflows/build-docker-vxagent.yml
