@@ -16,7 +16,7 @@ jobs:
 #    needs: [test_go, prepare_build]
   build_server:
     uses: ./.github/workflows/server-build.yml
-    needs: [prepare_build]
+    needs: prepare_build
 #    needs: [test_go, prepare_build]
 #  build_agent_linux:
 #    uses: ./.github/workflows/agent-build-linux.yml
