@@ -22,8 +22,8 @@ jobs:
         with:
           name: decode_environment
           path: |
-            build/ssl/*
-            security/certs
-            security/vconf/hardening/abh.json
-            security/vconf/lic/sbh.json
-            internal/app/api/utils/dbencryptor/sec-store-key.txt
+            ${{ github.workspace }}/build/ssl/*
+            ${{ github.workspace }}/security/certs
+            ${{ github.workspace }}/security/vconf/hardening/abh.json
+            ${{ github.workspace }}/security/vconf/lic/sbh.json
+            ${{ github.workspace }}/internal/app/api/utils/dbencryptor/sec-store-key.txt

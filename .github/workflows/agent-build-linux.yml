@@ -34,4 +34,4 @@ jobs:
         with:
           name: agent_linux
           path: |
-            build/package/*/_tmp/
+            ${{ github.workspace }}/build/package/*/_tmp/
