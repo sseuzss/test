@@ -18,9 +18,6 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: decode_environment
-      - name: debug
-        run: |
-          ls -R security
       - name: prepare files
         run: |
           mkdir -p build/artifacts/server

@@ -35,4 +35,3 @@ jobs:
           name: agent_osx
           path: |
             build/package/*/_tmp/
-            build/package/*/Dockerfile
