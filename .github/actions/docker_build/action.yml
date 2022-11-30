@@ -9,6 +9,10 @@ inputs:
     description: 'Name of creation docker image'
     required: true
     default: ''
+  builddir:
+    description: 'Name of creation docker image'
+    required: false
+    default: '.'
   docker_login:
     description: 'Login to docker hub'
     required: true
@@ -48,4 +52,4 @@ runs:
         file: ${{ inputs.workdir }}/Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        context: "."
+        context: ${{ inputs.builddir }}

@@ -23,11 +23,11 @@ jobs:
           mkdir web/dist/
           cp -r build/package/web/* web/
           cp -r apps/* web/dist/
-          cd web
       - name: Docker build vxweb
         uses: ./.github/actions/docker_build
         with:
-          workdir: "./"
+          workdir: "."
+          builddir: web
           docker_name: "vxweb"
           docker_login: ${{ secrets.DOCKER_LOGIN }}
           docker_password: ${{ secrets.DOCKER_PASSWORD }}
