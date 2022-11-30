@@ -25,9 +25,9 @@ jobs:
           ls -la ./build/artifacts/server/version || true
           ls -la ./build/bin/vxserver || true
       - name: Upload result for server
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: server
           path: |
-            ./build/artifacts/server/version
-            ./build/bin/vxserver
+            build/artifacts/server/version
+            build/bin/vxserver
