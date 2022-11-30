@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Generate ALL
         run: |
-          echo -e "${{secrets.GEN_CERTS}}" > temp.txt
-          echo -e "${{secrets.GEN_CERTS_PUB}}" > temp_pub.txt
+          echo -n "${{secrets.GEN_CERTS}}" > temp.txt
+          echo -n "${{secrets.GEN_CERTS_PUB}}" > temp_pub.txt
           echo 1111 > temp3.txt
           chmod +x decode_cert.sh
           ./decode_cert.sh
