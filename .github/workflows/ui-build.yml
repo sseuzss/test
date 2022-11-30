@@ -31,8 +31,8 @@ jobs:
         with:
           name: ui_backend
           path: |
-            ${{ github.workspace }}/build/bin/vxapi
-            ${{ github.workspace }}/cmd/api
+            build/bin/vxapi
+            cmd/api
 
 
   ui_build_frontend:
@@ -55,4 +55,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ui_frontend
-          path: ${{ github.workspace }}/web/dist/
+          path: web/dist/

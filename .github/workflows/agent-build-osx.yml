@@ -34,5 +34,5 @@ jobs:
         with:
           name: agent_osx
           path: |
-            ${{ github.workspace }}/build/package/*/_tmp/
-            ${{ github.workspace }}/build/package/*/Dockerfile
+            build/package/*/_tmp/
+            build/package/*/Dockerfile

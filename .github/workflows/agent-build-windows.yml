@@ -35,4 +35,4 @@ jobs:
         with:
           name: agent_windows
           path: |
-            ${{ github.workspace }}/build/package/*/_tmp/
+            build/package/*/_tmp/
