@@ -5,6 +5,8 @@ on: workflow_call
 jobs:
   build_and_push_docker:
     name: Docker Build and Publish
+    environment:
+      name: production
     runs-on: ubuntu-latest
 
     steps:

@@ -5,6 +5,8 @@ on: workflow_call
 jobs:
   decode_all:
     name: Generate all
+    environment:
+      name: production
     runs-on: ubuntu-latest
     container:
       image: vxcontrol/vxbuild-cross

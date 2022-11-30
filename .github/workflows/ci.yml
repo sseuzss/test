@@ -8,8 +8,6 @@ jobs:
     uses: ./.github/workflows/prepare_build.yml
   prepare_build_prod:
     if: ${{ github.ref == 'refs/heads/main' }}
-#    environment:
-#      name: production
     uses: ./.github/workflows/prepare_build_prod.yml
   # TESTS AND LINTERS
   test_go:
@@ -39,30 +37,20 @@ jobs:
   build_docker_vxweb:
     uses: ./.github/workflows/build-docker-vxweb.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    environment:
-      name: production
     needs: build_ui
   build_docker_vxapi:
     uses: ./.github/workflows/build-docker-vxapi.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    environment:
-      name: production
     needs: build_ui
   build_docker_vxagent:
     uses: ./.github/workflows/build-docker-vxagent.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    environment:
-      name: production
     needs: build_agent_linux
   build_docker_vxres:
     uses: ./.github/workflows/build-docker-vxagent.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    environment:
-      name: production
     needs: [ build_agent_linux, build_agent_windows, build_agent_osx ]
   build_docker_vxserver:
     uses: ./.github/workflows/build-docker-vxserver.yml
     if: ${{ github.ref == 'refs/heads/main' }}
-    environment:
-      name: production
     needs: build_server
