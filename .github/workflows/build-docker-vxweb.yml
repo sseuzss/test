@@ -11,6 +11,8 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: [ ui_frontend, all_environment ]
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Docker build vxweb
         uses: ./.github/actions/docker_build
         with:

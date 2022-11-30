@@ -11,6 +11,8 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: [ agent_linux, agent_osx, agent_windows, all_environment ]
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Rename Dockerfile
         run: |
           mv build/package/agent/Dockerfile_cross build/package/agent/Dockerfile
