@@ -2,9 +2,9 @@ FROM debian:buster-slim
 
 RUN mkdir -p /opt/vxagent/{bin,data,logs}
 
-COPY preparing.sh 			/opt/vxagent/bin/
-COPY _tmp/version 			/opt/vxagent/bin/
-COPY _tmp/linux/amd64/vxagent 	/opt/vxagent/bin/
+COPY build/package/agent/preparing.sh 			    /opt/vxagent/bin/
+COPY build/package/agent/_tmp/version 			    /opt/vxagent/bin/
+COPY build/package/agent/_tmp/linux/amd64/vxagent 	/opt/vxagent/bin/
 
 WORKDIR /opt/vxagent
 

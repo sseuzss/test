@@ -21,8 +21,8 @@ jobs:
   code_test:
     name: Code test with go test
     runs-on: ubuntu-latest
-#    container:
-#      image: vxcontrol/vxbuild-cross
+    container:
+      image: vxcontrol/vxbuild-cross
 
     steps:
       - name: Checkout
@@ -35,5 +35,5 @@ jobs:
       - name: run_go-test
         run: |
           mkdir -p .go
-#          go get ./...
-#          make test
+          go get ./...
+          make test
