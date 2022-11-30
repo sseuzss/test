@@ -1,0 +1,21 @@
+name: VXServer build and push
+
+on: workflow_call
+
+jobs:
+  build_and_push_docker:
+    name: Docker Build and Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: [ agent_linux, agent_osx, agent_windows, all_environment ]
+      - name: Rename Dockerfile
+        run: |
+          mv build/package/agent/Dockerfile_cross build/package/agent/Dockerfile
+      - name: Docker build vxres
+        uses: ./.github/actions/docker_build
+        with:
+          workdir: "build/package/agent"
+          docker_name: "vxres"

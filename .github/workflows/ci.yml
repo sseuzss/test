@@ -3,17 +3,20 @@ name: Docker build and push
 on: push
 
 jobs:
+  # PREPARE (GENERATE ALL)
+  prepare_build:
+    uses: ./.github/workflows/prepare_build.yml
+  # TESTS AND LINTERS
 #  test_go:
 #    uses: ./.github/workflows/test-go.yml
 #    needs: prepare_build
-  prepare_build:
-    uses: ./.github/workflows/prepare_build.yml
+  # BUILD BINARY
 #  build_ui:
 #    uses: ./.github/workflows/ui-build.yml
 #    needs: [test_go, prepare_build]
   build_server:
     uses: ./.github/workflows/server-build.yml
-    needs: prepare_build
+    needs: [prepare_build]
 #    needs: [test_go, prepare_build]
 #  build_agent_linux:
 #    uses: ./.github/workflows/agent-build-linux.yml
@@ -24,3 +27,19 @@ jobs:
 #  build_agent_osx:
 #    uses: ./.github/workflows/agent-build-osx.yml
 #    needs: [ test_go, prepare_build ]
+  # BUILD DOCKER
+#  build_docker_vxweb:
+#    uses: ./.github/workflows/build-docker-vxweb.yml
+#    needs: build_ui
+#  build_docker_vxapi:
+#    uses: ./.github/workflows/build-docker-vxapi.yml
+#    needs: build_ui
+#  build_docker_vxagent:
+#    uses: ./.github/workflows/build-docker-vxagent.yml
+#    needs: build_agent_linux
+#  build_docker_vxres:
+#    uses: ./.github/workflows/build-docker-vxagent.yml
+#    needs: [ build_agent_linux, build_agent_windows, build_agent_osx ]
+  build_docker_vxserver:
+    uses: ./.github/workflows/build-docker-vxserver.yml
+    needs: build_server

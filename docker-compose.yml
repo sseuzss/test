@@ -92,6 +92,88 @@ services:
         condition: service_started
       mysql:
         condition: service_started
+      vxweb:
+        condition: service_started
+
+  vxserver:
+    image: vxcontrol/soldr-vxserver
+    container_name: vx_server
+    hostname: vxserver.local
+    restart: unless-stopped
+    links:
+      - minio:minio.local
+      - mysql:mysql.local
+    networks:
+      - vx-stand
+    environment:
+      DB_HOST: mysql.local
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      MINIO_ENDPOINT: http://minio.local:9000
+    depends_on:
+      modules:
+        condition: service_started
+
+  vxweb:
+    image: vxcontrol/soldr-vxweb
+    container_name: vx_web
+    hostname: vxweb.local
+    restart: unless-stopped
+    links:
+      - minio:minio.local
+      - mysql:mysql.local
+    networks:
+      - vx-stand
+    environment:
+      DB_HOST: mysql.local
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      MINIO_ENDPOINT: http://minio.local:9000
+    depends_on:
+      minio:
+        condition: service_started
+      mysql:
+        condition: service_started
+
+  vxapi:
+    image: vxcontrol/soldr-vxapi
+    container_name: vx_api
+    hostname: vxapi.local
+    restart: unless-stopped
+    links:
+      - minio:minio.local
+      - mysql:mysql.local
+      - vxweb:vxweb.local
+    networks:
+      - vx-stand
+    environment:
+      DB_HOST: mysql.local
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      NEW_UI_USER: '{"mail": "admin@vxcontrol.com", "name": "admin", "pass": "$$2a$$10$$rIhzaeXujjEjuXXyR9f4web9U4OFx.B5j2hXC1xZiDyHRwzwXy27u"}'
+      MINIO_ENDPOINT: http://minio.local:9000
+    depends_on:
+      minio:
+        condition: service_started
+      mysql:
+        condition: service_started
+      vxweb:
+        condition: service_started
 
 networks:
   vx-stand:
