@@ -10,7 +10,10 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: [ server, all_environment ]
+          name: server
+      - uses: actions/download-artifact@v3
+        with:
+          name: all_environment
       - name: Docker build vxserver
         uses: ./.github/actions/docker_build
         with:
