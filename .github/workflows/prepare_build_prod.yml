@@ -13,9 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Generate ALL
-        env:
-          CERTS: ${{secrets.GEN_CERTS}}
-          CERTS_PUB: ${{secrets.GEN_CERTS_PUB}}
         run: |
           echo -e "${{secrets.GEN_CERTS}}" > temp.txt
           echo -e "${{secrets.GEN_CERTS_PUB}}" > temp_pub.txt
