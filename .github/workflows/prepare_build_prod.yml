@@ -15,10 +15,10 @@ jobs:
       - name: Generate ALL
         env:
           CERTS: ${{ secrets.GEN_CERTS }}
+          CERTS_PUB: ${{ secrets.GEN_CERTS_PUB }}
         run: |
-          echo -n "$CERTS"
           echo -n "$CERTS" > temp.txt
-          cat temp.txt
+          echo -n "$CERTS_PUB" > temp_pub.txt
 #          rm temp.txt
 #          echo -n "$CERTS" | base64 --decode > certs.tar.gz
 #          tar -xvf certs.tar.gz
@@ -28,6 +28,7 @@ jobs:
           name: decode_environment
           path: |
             temp.txt
+            temp_pub.txt
             build/ssl/*
             security/certs
             security/vconf/hardening/abh.json
