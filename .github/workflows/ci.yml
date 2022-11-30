@@ -8,7 +8,6 @@ jobs:
     uses: ./.github/workflows/prepare_build.yml
   prepare_build_prod:
     if: ${{ github.ref == 'refs/heads/main' }}
-    uses: ./.github/workflows/prepare_build_prod.yml
     secrets: inherit
   # TESTS AND LINTERS
   test_go:
@@ -21,7 +20,6 @@ jobs:
 #    needs: [test_go, prepare_build_prod]
   build_server:
     uses: ./.github/workflows/server-build.yml
-    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [test_go, prepare_build_prod]
 #  build_agent_linux:
 #    uses: ./.github/workflows/agent-build-linux.yml
@@ -58,6 +56,5 @@ jobs:
 #    secrets: inherit
   build_docker_vxserver:
     uses: ./.github/workflows/build-docker-vxserver.yml
-    if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_server
     secrets: inherit
