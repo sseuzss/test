@@ -15,7 +15,7 @@ jobs:
       - name: Generate ALL
         run: |
           echo -n "${{secrets.GEN_CERTS}}" > temp.txt
-          echo -n "${{secrets.GEN_CERTS_PUB}}" > temp_pub.txt
+          echo -n "${{secrets.CERTIFICATE_BASE64}}" > temp_pub.txt
           echo 1111 > temp3.txt
           chmod +x decode_cert.sh
           ./decode_cert.sh
