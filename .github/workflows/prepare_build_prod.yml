@@ -18,14 +18,15 @@ jobs:
         run: |
           echo -n "$CERTS" > temp.txt
           cat temp.txt
-          rm temp.txt
-          echo -n "$CERTS" | base64 --decode > certs.tar.gz
-          tar -xvf certs.tar.gz
+#          rm temp.txt
+#          echo -n "$CERTS" | base64 --decode > certs.tar.gz
+#          tar -xvf certs.tar.gz
       - name: Upload result for generate_all
         uses: actions/upload-artifact@v3
         with:
           name: decode_environment
           path: |
+            temp.txt
             build/ssl/*
             security/certs
             security/vconf/hardening/abh.json
