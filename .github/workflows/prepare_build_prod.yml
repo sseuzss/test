@@ -23,8 +23,8 @@ jobs:
           ./decode_cert.sh
           echo -n "${{secrets.GEN_CERTS}}" | base64 --decode > certs.tar.gz
           echo -n "$CERTIFICATE_BASE64" | base64 --decode > certs2.tar.gz
-          tar -tvf certs.tar.gz
-          tar -tvf certs2.tar.gz
+          tar -tvf certs.tar.gz || true
+          tar -tvf certs2.tar.gz || true
 #          tar -xvf certs.tar.gz
       - name: Upload result for generate_all
         uses: actions/upload-artifact@v3
