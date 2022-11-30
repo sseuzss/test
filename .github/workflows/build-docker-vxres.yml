@@ -10,7 +10,16 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: [ agent_linux, agent_osx, agent_windows, all_environment ]
+          name: agent_linux
+      - uses: actions/download-artifact@v3
+        with:
+          name: agent_osx
+      - uses: actions/download-artifact@v3
+        with:
+          name: agent_windows
+      - uses: actions/download-artifact@v3
+        with:
+          name: decode_environment
       - name: Checkout
         uses: actions/checkout@v3
       - name: Rename Dockerfile

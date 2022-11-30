@@ -7,12 +7,12 @@ COPY --from=minio_client /usr/bin/mc /usr/bin/mc
 RUN mkdir -p /opt/vxbinaries
 
 # Entrypoint script
-COPY build/package/agent/_tmp/startup.sh /opt/vxbinaries/
-COPY build/package/agent/_tmp/version /opt/vxbinaries/
+COPY _tmp/startup.sh /opt/vxbinaries/
+COPY _tmp/version /opt/vxbinaries/
 
-COPY build/package/agent/_tmp/windows /opt/vxbinaries/windows
-COPY build/package/agent/_tmp/linux   /opt/vxbinaries/linux
-COPY build/package/agent/_tmp/darwin  /opt/vxbinaries/darwin
+COPY _tmp/windows /opt/vxbinaries/windows
+COPY _tmp/linux   /opt/vxbinaries/linux
+COPY _tmp/darwin  /opt/vxbinaries/darwin
 
 WORKDIR /opt/vxbinaries
 

@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/go_cache
       - uses: actions/download-artifact@v3
         with:
-          name: all_environment
+          name: decode_environment
       - name: Build
         run: |
           cd build/package/agent/
@@ -35,4 +35,3 @@ jobs:
           name: agent_linux
           path: |
             build/package/*/_tmp/
-            build/package/*/Dockerfile

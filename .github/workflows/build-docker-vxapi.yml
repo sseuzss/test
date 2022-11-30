@@ -10,7 +10,10 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: [ ui_backend, all_environment ]
+          name: ui_backend
+      - uses: actions/download-artifact@v3
+        with:
+          name: decode_environment
       - name: Checkout
         uses: actions/checkout@v3
       - name: Docker build vxapi

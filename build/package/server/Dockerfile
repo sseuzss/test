@@ -7,7 +7,7 @@ COPY ../../artifacts/server/version 	/opt/vxserver/bin/
 COPY ../../bin/server 			        /opt/vxserver/bin/
 COPY ../../../db/server/migrations 	    /opt/vxserver/migrations
 COPY ../../../security/vconf 	        /opt/vxserver/vconf
-COPY ../../../security/crts/server 	    /opt/vxserver/crts/server
+COPY ../../../security/certs/server     /opt/vxserver/crts/server
 
 WORKDIR /opt/vxserver
 

@@ -13,7 +13,7 @@ jobs:
           name: server
       - uses: actions/download-artifact@v3
         with:
-          name: all_environment
+          name: decode_environment
       - name: Checkout
         uses: actions/checkout@v3
       - name: Docker build vxserver
