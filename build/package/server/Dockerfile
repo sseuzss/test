@@ -8,7 +8,7 @@ COPY build/package/server/preparing.sh 	/opt/vxserver/bin/
 COPY build/artifacts/server/version 	/opt/vxserver/bin/
 COPY build/bin/vxserver			        /opt/vxserver/bin/
 COPY db/server/migrations 	            /opt/vxserver/db/server/migrations
-COPY security/vconf 	                /opt/vxserver/vconf
+COPY security/vconf 	                /opt/vxserver/security/vconf
 COPY security/certs/server              /opt/vxserver/security/certs/server
 
 WORKDIR /opt/vxserver
