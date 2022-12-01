@@ -3,7 +3,7 @@ name: VXAgent installer build
 on: workflow_call
 
 jobs:
-  build_and_push_docker:
+  build_installer_linux:
     name: Installer build
     environment:
       name: production

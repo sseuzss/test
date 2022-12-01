@@ -1,10 +1,12 @@
 #!/bin/bash
 set -ex
 
-apt update && apt install -y hashdeep fakeroot git wget
-export VERSION=$( git describe --tags `git rev-list --tags --max-count=1` ).$CI_PIPELINE_IID
+#sudo apt update && sudo apt install -y hashdeep fakeroot git wget
+VERSION_FROM_GIT=$( git describe --tags `git rev-list --tags --max-count=1` )
+VERSION=${VERSION_FROM_GIT:-0.0.1}
+export VERSION=$VERSION.$GITHUB_RUN_NUMBER
 export VERSION=${VERSION/v/}
-DEBIAN_FRONTEND=noninteractive apt install -y  rpm
+DEBIAN_FRONTEND=noninteractive sudo apt install -y  rpm
 mkdir install_linux/
 
 mv DEBIAN/control TMP_control
@@ -52,7 +54,7 @@ fakeroot dpkg-deb --build vxagent vxagent-${VERSION}_${arch}.deb || exit 1
 echo "Done create deb $arch"
 
 cp *.deb install_linux/
-export VERSION=$( git describe --tags `git rev-list --tags --max-count=1` ).$CI_PIPELINE_IID
+export VERSION=$( git describe --tags `git rev-list --tags --max-count=1` ).$GITHUB_RUN_NUMBER
 export VERSION=${VERSION/v/}
 export VXSERVER_CONNECT="VXSERVER_CONNECT"
 mkdir -p /root/rpmbuild/SOURCES/

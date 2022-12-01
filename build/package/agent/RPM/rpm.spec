@@ -1,6 +1,6 @@
 Name:           vxagent
 Version:        $VERSION
-Release:        $CI_PIPELINE_IID
+Release:        $GITHUB_RUN_NUMBER
 Summary:        This service for work XDR agent
 License:        -
 
