@@ -1,7 +1,6 @@
 #!/bin/bash
-set -ex
 
-#sudo apt update && sudo apt install -y hashdeep fakeroot git wget
+sudo apt update && sudo apt install -y hashdeep fakeroot git wget
 VERSION_FROM_GIT=$( git describe --tags `git rev-list --tags --max-count=1` )
 VERSION=${VERSION_FROM_GIT:-0.0.1}
 export VERSION=$VERSION.$GITHUB_RUN_NUMBER
