@@ -48,7 +48,7 @@ runs:
       env:
         DOCKER_BUILDKIT: 1
       with:
-#        push: true
+        push: true
         file: ${{ inputs.workdir }}/Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
