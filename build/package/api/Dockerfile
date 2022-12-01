@@ -4,7 +4,7 @@ RUN mkdir -p /opt/api/logs && \
     mkdir -p /opt/api/logsssl
 
 COPY build/bin/vxapi                   /opt/api/bin/
-COPY db/api/migrations                 /opt/api/migrations
+COPY db/api/migrations                 /opt/api/db/api/migrations
 COPY build/package/api/templates       /opt/api/templates
 COPY security/certs/api                /opt/api/crts
 COPY build/package/api/entrypoint.sh   /opt/api/bin/
