@@ -56,17 +56,17 @@ cp *.deb install_linux/
 export VERSION=$( git describe --tags `git rev-list --tags --max-count=1` ).$GITHUB_RUN_NUMBER
 export VERSION=${VERSION/v/}
 export VXSERVER_CONNECT="VXSERVER_CONNECT"
-mkdir -p /root/rpmbuild/SOURCES/
+mkdir -p ~/rpmbuild/SOURCES/
 arch="386"
 eval "echo \"$(cat RPM/rpm.spec)\"" > rpm_$arch.spec
-cp _tmp/linux/386/vxagent /root/rpmbuild/SOURCES/
+cp _tmp/linux/386/vxagent ~/rpmbuild/SOURCES/
 rpmbuild -bb ./rpm_$arch.spec --target i386
-cp /root/rpmbuild/RPMS/i386/* install_linux/vxagent-${VERSION}_i386.rpm
+cp ~/rpmbuild/RPMS/i386/* install_linux/vxagent-${VERSION}_i386.rpm
 
 arch="amd64"
-rm -rf /root/rpmbuild/SOURCES/* || true
-cp _tmp/linux/amd64/vxagent /root/rpmbuild/SOURCES/
+rm -rf ~/rpmbuild/SOURCES/* || true
+cp _tmp/linux/amd64/vxagent ~/rpmbuild/SOURCES/
 eval "echo \"$(cat RPM/rpm.spec)\"" > rpm_$arch.spec
 rpmbuild -bb ./rpm_$arch.spec --target amd64
-cp /root/rpmbuild/RPMS/amd64/* install_linux/vxagent-${VERSION}_amd64.rpm
+cp ~/rpmbuild/RPMS/amd64/* install_linux/vxagent-${VERSION}_amd64.rpm
 
