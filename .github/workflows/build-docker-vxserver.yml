@@ -23,6 +23,7 @@ jobs:
           mkdir -p build/artifacts/server
           mv artifacts/server/version build/artifacts/server/version
           mv bin/vxserver build/bin/vxserver
+          chmod +x build/bin/vxserver
       - name: Docker build vxserver
         uses: ./.github/actions/docker_build
         with:
