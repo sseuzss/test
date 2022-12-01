@@ -39,7 +39,7 @@ jobs:
     uses: ./.github/workflows/agent-build-osx.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ test_go, prepare_build_prod ]
-   BUILD DOCKER
+#   BUILD DOCKER
   build_docker_vxweb:
     uses: ./.github/workflows/build-docker-vxweb.yml
     if: ${{ github.ref == 'refs/heads/main' }}
