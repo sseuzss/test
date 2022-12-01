@@ -1,6 +1,7 @@
 FROM debian:buster-slim
 
-RUN mkdir -p /opt/api/{logs,ssl}
+RUN mkdir -p /opt/api/logs && \
+    mkdir -p /opt/api/logsssl
 
 COPY build/bin/vxapi                   /opt/api/bin/
 COPY db/api/migrations                 /opt/api/migrations

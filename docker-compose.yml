@@ -105,7 +105,12 @@ services:
       - mysql:mysql.local
     networks:
       - vx-stand
+    expose:
+      - 8443/tcp
     environment:
+      LISTEN: wss://0.0.0.0:8443
+      LOG_DIR: logs
+      FILES_LOADER: s3
       DB_HOST: mysql.local
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
@@ -115,6 +120,9 @@ services:
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
       MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
       MINIO_ENDPOINT: http://minio.local:9000
+    volumes:
+      - vxserver-data:/opt/vxserver/data:rw
+      - /var/log/vxcontrol/vxserver:/opt/vxserver/logs:rw
     depends_on:
       modules:
         condition: service_started
@@ -130,6 +138,10 @@ services:
     networks:
       - vx-stand
     environment:
+      UI_USE_SSL: ${UI_USE_SSL:-true}
+      UI_SERVER_HOST: ${UI_SERVER_HOST}
+      UI_SERVER_PORT_HTTPS: ${UI_SERVER_PORT_HTTPS:-443}
+      UI_SERVER_PORT_HTTP: ${UI_SERVER_PORT_HTTP:-80}
       DB_HOST: mysql.local
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
@@ -156,8 +168,24 @@ services:
       - vxweb:vxweb.local
     networks:
       - vx-stand
+    expose:
+      - 8080/tcp
+      - 8443/tcp
+      - 9080/tcp
+    ports:
+      - ${MGMT_IP:-0.0.0.0}:${UI_SERVER_PORT_HTTPS:-443}:8443
+      - ${MGMT_IP:-0.0.0.0}:${UI_SERVER_PORT_HTTP:-80}:8080
+    volumes:
+      - vxapi-server-ssl:/opt/api/crts:rw
+      - /var/log/vxcontrol/wxapi:/opt/vxapi/logs:rw
     environment:
       DB_HOST: mysql.local
+      MGMT_IP: ${MGMT_IP}
+      UI_USE_SSL: ${UI_USE_SSL:-true}
+      UI_SERVER_HOST: ${UI_SERVER_HOST}
+      UI_SERVER_PORT_HTTPS: ${UI_SERVER_PORT_HTTPS:-443}
+      UI_SERVER_PORT_HTTP: ${UI_SERVER_PORT_HTTP:-80}
+      UI_STATIC_URL: http://vxweb.local:8080
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
@@ -183,4 +211,8 @@ volumes:
   vx-mysql-data:
     driver: local
   vx-minio-data:
+    driver: local
+  vxapi-server-ssl:
+    driver: local
+  vxserver-data:
     driver: local
