@@ -65,3 +65,9 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_server
     secrets: inherit
+  # BUILD INSTALLER OF AGENT
+  build_installer_vxagent_linux:
+    uses: ./.github/workflows/build-installer-vxagent-linux.yml
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build_agent_linux
+    secrets: inherit

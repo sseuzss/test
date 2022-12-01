@@ -1,4 +1,4 @@
-name: VXServer build and push
+name: VXAgent build and push
 
 on: workflow_call
 

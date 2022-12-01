@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+# preparing links to system libraries
+ln -s /lib/x86_64-linux-gnu/librt.so.1 /lib/x86_64-linux-gnu/librt.so 2>/dev/null || true
+ln -s /lib/x86_64-linux-gnu/libpthread.so.0 /lib/x86_64-linux-gnu/libpthread.so 2>/dev/null || true
+
+chmod +x /opt/vxcontrol/vxagent/bin/vxagent && chown root:root /opt/vxcontrol/vxagent/bin/vxagent
+
+if [ -n "$VXSERVER_CONNECT" ]; then
+  /opt/vxcontrol/vxagent/bin/vxagent -connect $VXSERVER_CONNECT -command install
+else
+  /opt/vxcontrol/vxagent/bin/vxagent -command install
+fi
+
+/opt/vxcontrol/vxagent/bin/vxagent -command start
