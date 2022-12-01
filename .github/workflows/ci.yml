@@ -31,7 +31,6 @@ jobs:
     uses: ./.github/workflows/agent-build-linux.yml
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [test_go, prepare_build_prod]
-#    needs: prepare_build_prod
   build_agent_windows:
     uses: ./.github/workflows/agent-build-windows.yml
     if: ${{ github.ref == 'refs/heads/main' }}
