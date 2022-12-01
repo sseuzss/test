@@ -68,7 +68,7 @@ services:
         condition: service_started
 
   vxres:
-    image: vxcontrol/soldr-vxres
+    image: seuz/vxres
     container_name: vx_res
     hostname: vxres.local
     restart: unless-stopped
@@ -83,6 +83,11 @@ services:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
+      MYSQL_ROOT_USER: ${DB_ROOT_USER}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      AGENT_SERVER_DB_NAME: ${AGENT_SERVER_DB_NAME}
+      AGENT_SERVER_DB_USER: ${AGENT_SERVER_DB_USER}
+      AGENT_SERVER_DB_PASS: ${AGENT_SERVER_DB_PASS}
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
       MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
@@ -96,7 +101,7 @@ services:
         condition: service_started
 
   vxserver:
-    image: vxcontrol/soldr-vxserver
+    image: seuz/vxserver
     container_name: vx_server
     hostname: vxserver.local
     restart: unless-stopped
@@ -116,19 +121,26 @@ services:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
+      AGENT_SERVER_DB_NAME: ${AGENT_SERVER_DB_NAME}
+      AGENT_SERVER_DB_USER: ${AGENT_SERVER_DB_USER}
+      AGENT_SERVER_DB_PASS: ${AGENT_SERVER_DB_PASS}
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
       MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
       MINIO_ENDPOINT: http://minio.local:9000
+      CONFIG_LOADER: db
+      VALID_LOADER: db
     volumes:
       - vxserver-data:/opt/vxserver/data:rw
       - /var/log/vxcontrol/vxserver:/opt/vxserver/logs:rw
     depends_on:
       modules:
         condition: service_started
+      vxres:
+        condition: service_started
 
   vxweb:
-    image: vxcontrol/soldr-vxweb
+    image: seuz/vxweb
     container_name: vx_web
     hostname: vxweb.local
     restart: unless-stopped
@@ -158,7 +170,7 @@ services:
         condition: service_started
 
   vxapi:
-    image: vxcontrol/soldr-vxapi
+    image: seuz/vxapi
     container_name: vx_api
     hostname: vxapi.local
     restart: unless-stopped
@@ -181,19 +193,20 @@ services:
     environment:
       DB_HOST: mysql.local
       MGMT_IP: ${MGMT_IP}
-      UI_USE_SSL: ${UI_USE_SSL:-true}
-      UI_SERVER_HOST: ${UI_SERVER_HOST}
-      UI_SERVER_PORT_HTTPS: ${UI_SERVER_PORT_HTTPS:-443}
-      UI_SERVER_PORT_HTTP: ${UI_SERVER_PORT_HTTP:-80}
-      UI_STATIC_URL: http://vxweb.local:8080
+      API_USE_SSL: ${UI_USE_SSL:-true}
+      API_SERVER_HOST: ${API_SERVER_HOST:-127.0.0.1}
+      API_SERVER_PORT_HTTPS: ${API_SERVER_PORT_HTTPS:-:443}
+      API_SERVER_PORT_HTTP: ${API_SERVER_PORT_HTTP:-:80}
+      API_STATIC_URL: http://vxweb.local:8080
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
+      API_SSL_KEY: ssl/server.key
+      API_SSL_CRT: ssl/server.crt
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
       MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
-      NEW_UI_USER: '{"mail": "admin@vxcontrol.com", "name": "admin", "pass": "$$2a$$10$$rIhzaeXujjEjuXXyR9f4web9U4OFx.B5j2hXC1xZiDyHRwzwXy27u"}'
       MINIO_ENDPOINT: http://minio.local:9000
     depends_on:
       minio:
