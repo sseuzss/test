@@ -1,6 +1,8 @@
 FROM debian:buster-slim
 
-RUN mkdir -p /opt/vxserver/{bin,data,logs}
+RUN mkdir -p /opt/vxserver/bin && \
+    mkdir -p /opt/vxserver/data && \
+    mkdir -p /opt/vxserver/logs
 
 COPY build/package/server/preparing.sh 	/opt/vxserver/bin/
 COPY build/artifacts/server/version 	/opt/vxserver/bin/
@@ -14,4 +16,4 @@ WORKDIR /opt/vxserver
 RUN chmod +x /opt/vxserver/bin/preparing.sh && \
     /opt/vxserver/bin/preparing.sh
 
-ENTRYPOINT ["/opt/vxserver/bin/server"]
+ENTRYPOINT ["/opt/vxserver/bin/vxserver"]

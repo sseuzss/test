@@ -53,8 +53,6 @@ fakeroot dpkg-deb --build vxagent vxagent-${VERSION}_${arch}.deb || exit 1
 echo "Done create deb $arch"
 
 cp *.deb install_linux/
-export VERSION=$( git describe --tags `git rev-list --tags --max-count=1` ).$GITHUB_RUN_NUMBER
-export VERSION=${VERSION/v/}
 export VXSERVER_CONNECT="VXSERVER_CONNECT"
 mkdir -p ~/rpmbuild/SOURCES/
 arch="386"
