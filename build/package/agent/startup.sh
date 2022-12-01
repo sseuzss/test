@@ -132,6 +132,7 @@ mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWO
 mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="ALTER DATABASE ${AGENT_SERVER_DB_NAME} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;"
 mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="CREATE USER IF NOT EXISTS '${AGENT_SERVER_DB_USER}' IDENTIFIED BY '${AGENT_SERVER_DB_PASS}';"
 mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="GRANT ALL PRIVILEGES ON ${AGENT_SERVER_DB_NAME}.* TO ${AGENT_SERVER_DB_USER}@'%';"
+mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} "$DB_NAME" < /opt/vxbinaries/seed.sql
 echo "done"
 
 sleep infinity
