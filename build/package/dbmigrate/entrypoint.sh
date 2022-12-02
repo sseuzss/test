@@ -8,7 +8,7 @@ while true; do
         break
     fi
     echo "failed to connect to mysql"
-    sleep 1
+    sleep 10
 done
 
 echo "Creating user for vxserver"

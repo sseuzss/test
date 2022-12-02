@@ -299,7 +299,7 @@ func (mm *MainModule) Start() (err error) {
 	return mm.connect(config)
 }
 
-const connectCooldownSeconds = 60
+const connectCooldownSeconds = 5
 
 func (mm *MainModule) connect(config map[string]string) error {
 	connect := func(ctx context.Context) error {
