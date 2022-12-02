@@ -125,14 +125,4 @@ mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASS" "$DB_NAME" < /opt/vxbi
 
 echo "done"
 
-echo "Creating user for vxserver"
-mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="CREATE DATABASE IF NOT EXISTS ${DB_NAME};"
-mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="ALTER DATABASE ${DB_NAME} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;"
-mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="CREATE DATABASE IF NOT EXISTS ${AGENT_SERVER_DB_NAME};"
-mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="ALTER DATABASE ${AGENT_SERVER_DB_NAME} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;"
-mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="CREATE USER IF NOT EXISTS '${AGENT_SERVER_DB_USER}' IDENTIFIED BY '${AGENT_SERVER_DB_PASS}';"
-mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} --execute="GRANT ALL PRIVILEGES ON ${AGENT_SERVER_DB_NAME}.* TO ${AGENT_SERVER_DB_USER}@'%';"
-mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} "$DB_NAME" < /opt/vxbinaries/seed.sql
-echo "done"
-
 sleep infinity

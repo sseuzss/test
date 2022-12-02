@@ -85,9 +85,6 @@ services:
       DB_NAME: ${DB_NAME}
       MYSQL_ROOT_USER: ${DB_ROOT_USER}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      AGENT_SERVER_DB_NAME: ${AGENT_SERVER_DB_NAME}
-      AGENT_SERVER_DB_USER: ${AGENT_SERVER_DB_USER}
-      AGENT_SERVER_DB_PASS: ${AGENT_SERVER_DB_PASS}
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
       MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
@@ -98,6 +95,37 @@ services:
       mysql:
         condition: service_started
       vxweb:
+        condition: service_started
+
+  vxdbmigrate:
+    image: seuz/vxdbmigrate
+    container_name: vx_dbmigrate
+    hostname: vxdbmigrate.local
+    links:
+      - minio:minio.local
+      - mysql:mysql.local
+    networks:
+      - vx-stand
+    environment:
+      DB_HOST: mysql.local
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      MYSQL_ROOT_USER: ${DB_ROOT_USER}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      AGENT_SERVER_DB_NAME: ${AGENT_SERVER_DB_NAME}
+      AGENT_SERVER_DB_USER: ${AGENT_SERVER_DB_USER}
+      AGENT_SERVER_DB_PASS: ${AGENT_SERVER_DB_PASS}
+      AGENT_SERVER_MINIO_BUCKET_NAME: ${AGENT_SERVER_MINIO_BUCKET_NAME}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      MINIO_ENDPOINT: http://minio.local:9000
+    depends_on:
+      minio:
+        condition: service_started
+      mysql:
         condition: service_started
 
   vxserver:
@@ -124,6 +152,7 @@ services:
       AGENT_SERVER_DB_NAME: ${AGENT_SERVER_DB_NAME}
       AGENT_SERVER_DB_USER: ${AGENT_SERVER_DB_USER}
       AGENT_SERVER_DB_PASS: ${AGENT_SERVER_DB_PASS}
+      AGENT_SERVER_MINIO_BUCKET_NAME: ${AGENT_SERVER_MINIO_BUCKET_NAME}
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
       MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
@@ -136,7 +165,7 @@ services:
     depends_on:
       modules:
         condition: service_started
-      vxres:
+      vxdbmigrate:
         condition: service_started
 
   vxweb:

@@ -1,0 +1,24 @@
+name: VXdbmigrate build and push
+
+on: workflow_call
+
+jobs:
+  build_and_push_docker:
+    name: Docker Build and Publish
+    environment:
+      name: production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: prepare_build
+        run: |
+          chmod +x build/package/dbmigrate/entrypoint.sh
+      - name: Docker build dbmigrate
+        uses: ./.github/actions/docker_build
+        with:
+          workdir: "build/package/dbmigrate"
+          docker_name: "vxdbmigrate"
+          docker_login: ${{ secrets.DOCKER_LOGIN }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
