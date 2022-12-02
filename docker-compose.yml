@@ -245,6 +245,19 @@ services:
       vxweb:
         condition: service_started
 
+  vxagent:
+    image: seuz/vxagent
+    container_name: vx_agent
+    hostname: vxagent.local
+    restart: unless-stopped
+    networks:
+      - vx-stand
+    environment:
+      CONNECT: "wss://vxserver.local:8443"
+    depends_on:
+      vxserver:
+        condition: service_started
+
 networks:
   vx-stand:
     driver: bridge
