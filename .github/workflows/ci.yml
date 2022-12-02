@@ -65,6 +65,11 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_server
     secrets: inherit
+  build_docker_vxdbmigrate:
+    uses: ./.github/workflows/build-docker-dbmigrate.yml
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: test_go
+    secrets: inherit
   # BUILD INSTALLER OF AGENT
   build_installer_vxagent_linux:
     uses: ./.github/workflows/build-installer-vxagent-linux.yml
