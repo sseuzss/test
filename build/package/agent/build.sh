@@ -9,7 +9,8 @@ BUILD_ARTIFACTS_DIR="$ROOT_DIR/build/artifacts/agent"
 [ -n "${PACKAGE_VER+set}" ] || PACKAGE_VER=$(git describe --always `git rev-list --tags --max-count=1`)
 [ -n "${PACKAGE_REV+set}" ] || PACKAGE_REV=$(git rev-parse --short HEAD)
 
-export VERSION_STRING="$PACKAGE_VER.$GITHUB_RUN_NUMBER"
+BUILD_VERSION="${GITHUB_RUN_NUMBER:-0}"
+export VERSION_STRING="$PACKAGE_VER.$BUILD_VERSION"
 [ "$PACKAGE_REV" ] && VERSION_STRING="$VERSION_STRING-$PACKAGE_REV"
 mkdir -p "$BUILD_ARTIFACTS_DIR"
 echo $VERSION_STRING > "$BUILD_ARTIFACTS_DIR/version"
