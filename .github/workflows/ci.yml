@@ -1,6 +1,10 @@
 name: Docker build and push
 
-on: push
+on:
+  push:
+    branches:
+      - "**"
+    workflow_dispatch:
 
 jobs:
   # PREPARE (GENERATE ALL)
