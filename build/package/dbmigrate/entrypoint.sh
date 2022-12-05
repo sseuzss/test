@@ -8,7 +8,7 @@ while true; do
         break
     fi
     echo "failed to connect to mysql"
-    sleep 10
+    sleep 20
 done
 
 echo "Creating user for vxserver"
@@ -63,11 +63,11 @@ IGNORE INTO \`services\` (
       "s3": {
         "access_key": "$MINIO_ACCESS_KEY",
         "secret_key": "$MINIO_SECRET_KEY",
-        "bucket_name": "$MINIO_BUCKET_NAME",
+        "bucket_name": "$AGENT_SERVER_MINIO_BUCKET_NAME",
         "endpoint": "$MINIO_ENDPOINT"
       },
       "server": {
-        "host": "vxserver.local",
+        "host": "$AGENT_SERVER_HOST",
         "port": 8443,
         "proto": "wss"
       }
@@ -97,3 +97,4 @@ IGNORE INTO \`users\` (
 
 EOT
 mysql --host=${DB_HOST} --user=${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} --port=${DB_PORT} "$DB_NAME" < /opt/vxdbmigrate/seed.sql
+sleep infinity

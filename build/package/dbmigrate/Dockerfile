@@ -1,10 +1,11 @@
 FROM minio/mc as minio_client
 
-FROM mysql
+FROM alpine
 
 COPY --from=minio_client /usr/bin/mc /usr/bin/mc
 
-RUN mkdir -p /opt/vxdbmigrate/utils
+RUN mkdir -p /opt/vxdbmigrate/utils && \
+    apk add mysql-client bash
 
 # Entrypoint script
 COPY build/package/dbmigrate/entrypoint.sh /opt/vxdbmigrate/

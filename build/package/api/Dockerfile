@@ -7,7 +7,7 @@ COPY build/bin/vxapi                   /opt/api/bin/
 COPY db/api/migrations                 /opt/api/db/api/migrations
 COPY build/package/api/templates       /opt/api/templates
 COPY build/ssl                         /opt/api/ssl
-COPY security/certs/api                /opt/api/crts
+COPY security/certs/api                /opt/api/security/certs/api
 COPY build/package/api/entrypoint.sh   /opt/api/bin/
 
 RUN chmod +x /opt/api/bin/entrypoint.sh
