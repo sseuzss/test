@@ -4,75 +4,75 @@ on: push
 
 jobs:
   # PREPARE (GENERATE ALL)
-#  prepare_build:
-#    uses: ./.github/workflows/prepare_build.yml
+  prepare_build:
+    uses: sseuzss/test/.github/workflows/prepare_build.yml@main
   prepare_build_prod:
     if: ${{ github.ref == 'refs/heads/main' }}
-    uses: ./.github/workflows/prepare_build_prod.yml
+    uses: sseuzss/test/.github/workflows/prepare_build_prod.yml@main
     secrets: inherit
   # TESTS AND LINTERS
-#  test_go:
-#    uses: ./.github/workflows/test-go.yml
-#    needs: prepare_build
-  # BUILD BINARY
-#  build_api:
-#    uses: ./.github/workflows/api-build.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: [test_go, prepare_build_prod]
-#  build_web:
-#    uses: ./.github/workflows/web-build.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: [test_go, prepare_build_prod]
-#  build_server:
-#    uses: ./.github/workflows/server-build.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: [test_go, prepare_build_prod]
-  build_agent_linux:
-    uses: ./.github/workflows/agent-build-linux.yml
+  test_go:
+    uses: sseuzss/test/.github/workflows/test-go.yml@main
+    needs: prepare_build
+   BUILD BINARY
+  build_api:
+    uses: sseuzss/test/.github/workflows/api-build.yml@main
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: prepare_build_prod
-#  build_agent_windows:
-#    uses: ./.github/workflows/agent-build-windows.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: [ test_go, prepare_build_prod ]
-#  build_agent_osx:
-#    uses: ./.github/workflows/agent-build-osx.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: [ test_go, prepare_build_prod ]
+    needs: [test_go, prepare_build_prod]
+  build_web:
+    uses: sseuzss/test/.github/workflows/web-build.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [test_go, prepare_build_prod]
+  build_server:
+    uses: sseuzss/test/.github/workflows/server-build.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [test_go, prepare_build_prod]
+  build_agent_linux:
+    uses: sseuzss/test/.github/workflows/agent-build-linux.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [test_go, prepare_build_prod]
+  build_agent_windows:
+    uses: sseuzss/test/.github/workflows/agent-build-windows.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ test_go, prepare_build_prod ]
+  build_agent_osx:
+    uses: sseuzss/test/.github/workflows/agent-build-osx.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ test_go, prepare_build_prod ]
 #   BUILD DOCKER
-#  build_docker_vxweb:
-#    uses: ./.github/workflows/build-docker-vxweb.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: build_web
-#    secrets: inherit
-#  build_docker_vxapi:
-#    uses: ./.github/workflows/build-docker-vxapi.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: build_api
-#    secrets: inherit
-#  build_docker_vxagent:
-#    uses: ./.github/workflows/build-docker-vxagent.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: build_agent_linux
-#    secrets: inherit
-#  build_docker_vxres:
-#    uses: ./.github/workflows/build-docker-vxres.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: [ build_agent_linux, build_agent_windows, build_agent_osx ]
-#    secrets: inherit
-#  build_docker_vxserver:
-#    uses: ./.github/workflows/build-docker-vxserver.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: build_server
-#    secrets: inherit
-#  build_docker_vxdbmigrate:
-#    uses: ./.github/workflows/build-docker-dbmigrate.yml
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    needs: test_go
-#    secrets: inherit
+  build_docker_vxweb:
+    uses: sseuzss/test/.github/workflows/build-docker-vxweb.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build_web
+    secrets: inherit
+  build_docker_vxapi:
+    uses: sseuzss/test/.github/workflows/build-docker-vxapi.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build_api
+    secrets: inherit
+  build_docker_vxagent:
+    uses: sseuzss/test/.github/workflows/build-docker-vxagent.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build_agent_linux
+    secrets: inherit
+  build_docker_vxres:
+    uses: sseuzss/test/.github/workflows/build-docker-vxres.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ build_agent_linux, build_agent_windows, build_agent_osx ]
+    secrets: inherit
+  build_docker_vxserver:
+    uses: sseuzss/test/.github/workflows/build-docker-vxserver.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build_server
+    secrets: inherit
+  build_docker_vxdbmigrate:
+    uses: sseuzss/test/.github/workflows/build-docker-dbmigrate.yml@main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: test_go
+    secrets: inherit
   # BUILD INSTALLER OF AGENT
   build_installer_vxagent_linux:
-    uses: ./.github/workflows/build-installer-vxagent-linux.yml
+    uses: sseuzss/test/.github/workflows/build-installer-vxagent-linux.yml@main
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build_agent_linux
     secrets: inherit
