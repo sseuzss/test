@@ -18,7 +18,7 @@ jobs:
   test_go:
     uses: sseuzss/test/.github/workflows/test-go.yml@main
     needs: prepare_build
-   BUILD BINARY
+#   BUILD BINARY
   build_api:
     uses: sseuzss/test/.github/workflows/api-build.yml@main
     if: ${{ github.ref == 'refs/heads/main' }}
